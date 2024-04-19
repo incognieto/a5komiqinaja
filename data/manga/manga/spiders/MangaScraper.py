@@ -39,13 +39,46 @@ class MangaSpider(scrapy.Spider):
         # Mendapatkan genre
         genre = response.css("span[itemprop='genre']::text").getall()
 
+        # Mendapatkan status
+        status = response.css("div.spaceit_pad")
+        statusIndex = 0
+        for i in range(len(status)):
+            if status[i].css("span::text").get()=="Status:":
+                statusIndex = i
+
+        # Mendapatkan publish time
+        publishTime = response.css("div.spaceit_pad")
+        publishTimeIndex = 0
+        for i in range(len(publishTime)):
+            if publishTime[i].css("span::text").get()=="Published:":
+                publishTimeIndex = i
+
+        # Mendapatkan Author
+        authors = response.css("div.spaceit_pad")
+        authorsIndex = 0
+        for i in range(len(authors)):
+            if authors[i].css("span::text").get()=="Authors:":
+                authorsIndex = i
+
+        # Mendapatkan Type
+        type = response.css("div.spaceit_pad")
+        typeIndex = 0
+        for i in range(len(type)):
+            if type[i].css("span::text").get()=="Type:":
+                typeIndex = i
+        
         item = {
             "rank": rank,
             "title": title,
             "rating": rating,
+            "type": response.css("div.spaceit_pad")[typeIndex].css("a::text").getall(),
             "genre": genre,
+            "authors": response.css("div.spaceit_pad")[authorsIndex].css("a::text").getall(),
+            "status": status[statusIndex].css("div.spaceit_pad").css("div.spaceit_pad::text").get(),
+            "publishTime": publishTime[publishTimeIndex].css("div.spaceit_pad").css("div.spaceit_pad::text").get(),
             "sinopsis": sinopsis
         }
+
         # ------------------------ (!) Jangan coba coba menggenerate Gambar kalau Laptop mu tidak mau nge lag ---------------------------
 
         # image_url = response.css("img::attr(data-src)").get()
