@@ -31,7 +31,7 @@ class MangaSpider(scrapy.Spider):
         rating = response.meta["rating"]
 
         # Membersihkan judul dari karakter yang tidak valid
-        clean_title = title.replace(":", "")
+        # clean_title = title.replace(":", "")
 
         # Mendapatkan sinopsis
         sinopsis = "".join(response.css("[itemprop='description']::text").getall())
@@ -39,31 +39,54 @@ class MangaSpider(scrapy.Spider):
         # Mendapatkan genre
         genre = response.css("span[itemprop='genre']::text").getall()
 
+        # Mendapatkan karakter
+        characters = []
+        character_images = {}
+        for character in response.css("div.detail-characters-list a"):
+            character_name = character.css("::text").get().strip()
+            if character_name:
+                characters.append(character_name)
+                image_url = character.css("img::attr(data-src)").get()
+                character_images[character_name] = image_url
+        
+        # ______________Cover Generator @nieto______________
+
+        image_url = response.css("img::attr(data-src)").get() # Penyimpanan gambar
+
+        file_name = image_url.split("/")[-1]  # Extracting image file name from URL
+        image_id = file_name.split(".")[0]  # Extracting ID from file name
+
+        directory = "../outputScrap/cover" # Complete path for image storage in the "cover" folder
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        image_path = f"{directory}/{file_name}"
+
+        with open(image_path, "wb") as f: # Saving image to the file system
+            f.write(urllib.request.urlopen(image_url).read())
+
+
+        # tambahin disini modul ambil author @aslim
+
+        # tambahin disini modul ambil status @aslim
+
+        # tambahin disini modul ambil jenis @aslim
+
+
+        # ______________Scrap Item______________
         item = {
-            "rank": rank,
-            "title": title,
-            "rating": rating,
-            "genre": genre,
-            "sinopsis": sinopsis
+            "rank": rank,  # ranking manga
+            "id": image_id,  # ID from image file name
+            "title": title,  # judul manga
+            # published date manga @jizdan
+            # author manga @aslim
+            # status manga @aslim
+            # jenis manga  @aslim
+            "rating": rating,  # rating manga
+            "genre": genre,  # genre manga
+            "characters": characters,  # karakter manga
+            "sinopsis": sinopsis,  # sinopsis manga
+            "image_path": image_path,
         }
-        # ------------------------ (!) Jangan coba coba menggenerate Gambar kalau Laptop mu tidak mau nge lag ---------------------------
-
-        # image_url = response.css("img::attr(data-src)").get()
-
-        # # Path lengkap untuk penyimpanan gambar dalam folder "cover"
-        # directory = "../outputScrap/cover"
-        # if not os.path.exists(directory):
-        #     os.makedirs(directory)
-        # image_name = f"{directory}/{clean_title}.jpg"
-
-        # # Menyimpan gambar ke dalam sistem file
-        # with open(image_name, "wb") as f:
-        #     f.write(urllib.request.urlopen(image_url).read())
-
-        # # Menambahkan keterangan gambar ke dalam item
-        # item["image_path"] = image_name
-
-        # --------------------------------------------------------------------------------------------------------------------------------
 
         yield item
 
