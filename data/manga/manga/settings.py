@@ -94,3 +94,9 @@ FEED_EXPORT_ENCODING = "utf-8"
 
 FEED_FORMAT = 'json'  # Mengatur format output menjadi json
 FEED_URI = '../outputScrap/output.json'  # Menentukan nama file dan lokasi untuk menyimpan hasil scraping
+
+DEPTH_PRIORITY = 1  # Mengatur prioritas kedalaman
+CONCURRENT_REQUESTS = 1  # Mengatur jumlah request yang dilakukan secara bersamaan
+
+SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'  # Mengatur jenis queue yang digunakan
+SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'  # Mengatur jenis queue yang digunakan
