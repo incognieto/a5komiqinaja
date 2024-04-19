@@ -33,13 +33,19 @@ class MangaSpider(scrapy.Spider):
         # Membersihkan judul dari karakter yang tidak valid
         clean_title = title.replace(":", "")
 
+        # Mendapatkan sinopsis
+        sinopsis = "".join(response.css("[itemprop='description']::text").getall())
+
+        # Mendapatkan genre
+        genre = response.css("span[itemprop='genre']::text").getall()
+
         item = {
             "rank": rank,
             "title": title,
             "rating": rating,
-            "sinopsis": "".join(response.css("[itemprop='description']::text").getall())
+            "genre": genre,
+            "sinopsis": sinopsis
         }
-
         # ------------------------ (!) Jangan coba coba menggenerate Gambar kalau Laptop mu tidak mau nge lag ---------------------------
 
         # image_url = response.css("img::attr(data-src)").get()
