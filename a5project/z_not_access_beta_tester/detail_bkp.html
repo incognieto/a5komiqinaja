@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Detail</title>
+    <!-- Bootstrap CSS (Optional) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Your Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .manga-details {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .manga-details img {
+            max-width: 100%;
+            height: auto;
+        }
+        .manga-details h1 {
+            margin-top: 20px;
+        }
+        .manga-details p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container manga-details">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="library_joiner.html" class="btn btn-primary">&larr; Back to Home</a>
+                <hr>
+                <div id="manga-details-content">
+                    <!-- Manga details will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (required for Bootstrap JavaScript) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Your Custom JavaScript -->
+    <script>
+        // Function to fetch and display manga details
+        function displayMangaDetails(mangaId) {
+            // Fetch manga details based on mangaId
+            fetch(`../../data/manga/outputScrap/output.json`)
+                .then(response => response.json())
+                .then(data => {
+                    const manga = data.find(item => item.id === mangaId);
+
+                    // Check if manga is found
+                    if (manga) {
+                        const mangaDetails = `
+                            <img src="${manga.image_path}" alt="${manga.title} Poster">
+                            <h1>${manga.title}</h1>
+                            <p><strong>Rank:</strong> ${manga.rank}</p>
+                            <p><strong>Publish Time:</strong> ${manga.publishTime}</p>
+                            <p><strong>Status:</strong> ${manga.status}</p>
+                            <p><strong>Type:</strong> ${manga.type.join(', ')}</p>
+                            <p><strong>Rating:</strong> ${manga.rating}</p>
+                            <p><strong>Genres:</strong> ${manga.genre.join(', ')}</p>
+                            <p><strong>Characters:</strong> ${manga.characters.join(', ')}</p>
+                            <p><strong>Synopsis:</strong> ${manga.sinopsis}</p>
+                        `;
+
+                        // Display manga details in #manga-details-content element
+                        document.getElementById('manga-details-content').innerHTML = mangaDetails;
+                    } else {
+                        // If manga is not found, display an error message
+                        document.getElementById('manga-details-content').innerHTML = '<p>Manga not found</p>';
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('manga-details-content').innerHTML = '<p>Failed to load manga details</p>';
+                });
+        }
+
+        // Call the function when the page loads to get mangaId from URL
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mangaId = urlParams.get('id');
+
+            // Call the function to display manga details
+            displayMangaDetails(mangaId);
+        };
+    </script>
+</body>
+</html>

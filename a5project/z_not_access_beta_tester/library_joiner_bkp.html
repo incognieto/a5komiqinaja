@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KomiqinAja | a5</title>
+
+    <!-- ------------------------ favicon ------------------------ -->
+    <link rel="shortcut icon" href="library/assets/img/favicon.png" type="image/x-icon">
+    
+    <!-- ------------------------ remixicon ------------------------ -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- ------------------------ swiper.css ------------------------ -->
+    <link rel="stylesheet" href="library/assets/css/swiper-bundle.min.css">
+
+    <!-- ------------------------ style.css ------------------------ -->
+    <link rel="stylesheet" href="library/assets/css/style.css">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- ------------------------ Header------------------------ -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">Suikanime</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#emision" class="nav__link active-link">Seasonal</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#popular" class="nav__link">Popular</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#news" class="nav__link">News</a>
+                    </li>
+                    <form action="" method="get" class="form">
+                        <input type="search" placeholder="Search anime..." class="seach__button">
+                        <i class="ri-search-line icon-search"></i>
+                    </form>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <!-- Toggle button -->
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- ------------------------ Auto Fill Manga ------------------------ -->
+        <section class="section emision" id="emision">
+            <div class="section__title">
+                <h1>TOP MANGA</h1>
+                <span class="line"></span>
+                <p>100 animes<br>on airing</p>
+            </div>
+            <div class="anime__grid grid" id="animeon"></div>
+        </section>
+
+        <!-- Paging -->
+        <div class="row px-3 mb-5 justify-content-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination d-flex justify-content-center" id="pagination">
+                    <!-- Placeholder for dynamic pagination -->
+                </ul>
+            </nav>
+        </div>
+
+        <!-- ------------------------ Auto Fill Popular ------------------------ -->
+        <section class="section popular" id="popular">
+            <div class="section__title">
+                <h1>Popular</h1>
+                <span class="line"></span>
+                <p>Top 10 most<br>popular anime</p>
+            </div>
+            <div class="popular__container swiper">
+                <div class="swiper-wrapper" id="animetop"></div>
+                <div class="swiper-button-next">
+                    <i class="ri-arrow-right-s-line"></i>
+                </div>
+                <div class="swiper-button-prev">
+                    <i class="ri-arrow-left-s-line"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------ Footer ------------------------ -->
+    <footer class="section footer">
+        <div class="footer__container container grid">
+            <div>
+                <a href="#" class="footer__logo">Suikanime</a>
+                <p class="footer__description">
+                    On this website you will find the manga that are <br>
+                    currently on the air, the most popular manga <br>
+                    and news related to anime and manga.
+                </p>
+            </div>
+
+            <div class="footer__content">
+                <div>
+                    <h3 class="footer__title">Menu</h3>
+                    <ul class="footer__links">
+                        <li>
+                            <a href="#" class="footer__link">Home</a>
+                        </li>
+                        <li>
+                            <a href="#emision" class="footer__link">Seasonal</a>
+                        </li>
+                        <li>
+                            <a href="#popular" class="footer__link">Popular</a>
+                        </li>
+                        <li>
+                            <a href="#news" class="footer__link">News</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer__title">Support</h3>
+                    <ul class="footer__links">
+                        <li>
+                            <a href="#" class="footer__link">Terms and Conditions</a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__link">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__link">FAQs</a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__link">About</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer__title">Social</h3>
+                    <ul class="footer__social">
+                        <li>
+                            <a href="#" class="footer__social-link">
+                                <i class="ri-facebook-fill"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__social-link">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__social-link">
+                                <i class="ri-twitter-line"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__copy">
+            <span>&#169 2022 Suikanime</span>
+            <span>Website design by @a5</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- ------------------------  Swiper JS ------------------------ -->
+    <script src="library/assets/js/swiper-bundle.min.js"></script>
+    
+    <!-- ------------------------ main.js ------------------------ -->
+    <script src="./library/assets/js/main.js"></script>
+    
+</body>
+
+</html>
